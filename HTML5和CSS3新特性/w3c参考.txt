@@ -1,0 +1,9 @@
+w3c官方网址：
+http://www.w3.org/TR/html/
+
+time标签的常用格式和用法：
+http://www.w3.org/TR/html/text-level-semantics.html#the-time-element
+
+
+4.5 Text-level semantics（文本级别的语义标签）：
+http://www.w3.org/TR/html/text-level-semantics.html

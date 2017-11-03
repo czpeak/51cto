@@ -1,0 +1,223 @@
+1、任何标签都可以加ID。包括link
+2、任何标签的任何属性，都可以修改
+给link加ID 通过修改href属性实现换肤
+3、操作属性的方法
+	obj.style.value = 'aaa' // 方法1
+	obj.style.['name'] = 'aaa' // 方法2 修改的属性不确定的时候使用
+4、obj.style.css属性 操作的都是行间的属性
+5、JavaScript组成：
+	ECMAScript:翻译（人与计算机之间的翻译）核心 解释器 几乎没有兼容性问题
+	DOM:Document Object Model 赋予JS操作HTML的能力 有一些操作不兼容
+	BOM:Brower Object Model window对象 和浏览器打交道的操作 没有兼容问题（完全不兼容）
+6、变量的类型：数字 字符串 布尔 函数 对象 undefined 	(typeof a)
+	变量本身没有类型，取决于它的值
+	一个变量应该只存一种类型的值
+	undefined：1、没有定义
+				2、定义了没有赋值
+7、字符串转数字：  
+	var str = 'abcjnevjenv' ===> str[1] ==> b 低版本IE不支持
+								str.charAt(1) ==>b
+	显式类型转换（强制类型转换）
+		parseInt(a) 转换整数
+			从左向右读，直到遇到非数字，返回前面的数字
+				'12' ==> 12
+				'12abc' ==> 12
+				'12abc24' ==> 12
+				'3.5' ==> 3
+				‘abc' ==> NaN (NaN和NaN不等)
+				isNaN(a) 判断是否是NaN
+		parseFloat(a) 转换小数
+				'3.5' ==> 3.5
+				'4' ==> 4 
+	隐式类型转换
+		var a = 5;
+		var b = '5';
+		a==b ==> true; //先转换类型再比较
+		a===b ==> false; //不转换类型比较
+		
+		var a = '12';
+		var b = '5';
+		a-b ==> 7 
+8、变量的作用域
+	全局变量：任何地方都能使用
+	局部变量：只能在定义它的函数里面使用
+9、闭包：子函数可以使用父函数的局部变量
+10、命名规范：可读性--能看懂
+			规范性--符合规则 匈牙利命名法（类型前缀 + 首字母大写）
+			类型前缀：a ==> Array 数组
+					b ==> Boolean 布尔值
+					f ==> Float 浮点数
+					fn ==> Function 函数
+					i ==> Integer 整数
+					o ==> Object 对象
+					re ==> RegExp 正则表达式
+					s ==> String 字符串
+					v ==> Variant 变体变量
+11、运算符： 
+		算术：+ - * / %
+		赋值：= += -= *= /= %=
+		关系：> < <= >= == === != !==
+		逻辑：&& || !
+		运算符优先级：()
+12、流程控制
+	if elseif ... else
+	switch 
+	? :
+	
+	break:打破、zhong
+	continue:继续
+	
+	什么是真：true、非0数字、非空字符串、非空对象
+	什么是假：false、0、空字符窜、空对象、null、undefined
+13、json:
+14、循环 数组 for(var i = 0; i< array.length; i++){}
+		JSON for(var i in json){}
+第八课时
+	1、函数返回值：
+		什么是函数返回值
+			函数的执行结果
+			可以没有return
+		一个函数应该只返回一种类型的值
+	2、函数传参
+		可变参/不定参:arguments是一个参数的个数可变，参数数组
+		例子:
+		function sum(){
+			var result = 0;
+			for(var i=0;i<arguments.length;i++) {
+				result += arguments[i]; 
+			}
+			return result;
+		}
+		sum(12,11,54,616,105);
+		例子：
+		function css(obj, name, value) {
+			if(arguments.length === 2) {
+				return obj.style[name];
+			}else {
+				obj.style[name] = value
+			}
+		}
+		
+		window.onload = function() {
+			var oDiv = document.getElementById("div1");
+			alert(css(oDiv, 'widht'));
+			css(oDiv, 'background', 'green')
+		}
+	
+		//无法取复合样式，background、border等
+		function getStyle(obj, name){
+			if(obj.currentStyle) {
+				//IE、Opera
+				//alert("我支持currentStyle");
+				alert(obj.currentStyle[name]);
+			} else {
+				//FF、chrome、safari
+				//alert("我不支持currentStyle");
+				alert(getComputedStyle(obj,false)[name]);
+			}
+		}
+	3、数组
+		定义：
+			var arr = [1, 2, 3]
+			var arr2 = new Array(1, 2, 3);
+		属性：
+			length：
+				既可以获取，又可以设置
+				arr.lenght = 0 //清空数组
+		使用原则：数组中应该只存一种类型的变量
+		添加：push 往数组的尾部添加
+			unshift 往头部添加
+		删除：pop 从数组尾部删除
+			shift 从头部删除
+			var arr = [1,2,3,4,5,6]
+			splice  删除 arr.splice(2,3) ==> arr=[1,2,6]
+					插入 arr.splice(2,0,'a','b','c') ==> arr=[1,2,'a','b','c',3,4,5,6]
+					替换 arr.splice(2,3,'a','b','c') ==> arr=[1,2,'a','b','c',6]
+			concat 数组链接
+					var a = [1,2,3];
+					var b = [4,5,6];
+					a.concat(b) ==> [1,2,3,4,5,6]
+			join 把数组元素拼接
+				a.join('1')  ==> 1-2-3
+			sort 排序   数组.sort() //只能比较字符串
+						数组.sort(function(n1, n2){
+							/*if(n1<n2){
+								return -1
+							} else if(n1>n2) {
+								return 1
+							} else {
+								return 0
+							}*/
+							return n1-n2;
+						})
+
+第九课时 定时器
+	var timer = setInterval(function(){}, 1000) //间隔一段时间，
+	clearInterval(timer)
+	var timer = setTimeout() //延迟一段时间，只执行一次
+	clearTimeout(timer)
+第十一课时
+	子节点：只算第一层
+		oUl.childNodes ==> 有文本节点，元素节点
+		oUl.childNodes[i].nodeType ==> =3是文本节点 =1是元素节点
+
+		oUl.children ==> 只包含元素节点，不包含文本节点
+		
+		有兼容性问题：
+			首节点
+			firstChild：高版本的浏览器会获取到文本节点（只适合IE6-8）
+			firstElementChild: 高版本的浏览器适用，不适合低版本浏览器
+			尾节点
+			lastChild：高版本的浏览器会获取到文本节点（只适合IE6-8）
+			lastElementChild: 高版本的浏览器适用，不适合低版本浏览器
+			前兄弟节点
+			nextSibling：高版本的浏览器会获取到文本节点（只适合IE6-8）
+			nextElementSibling: 高版本的浏览器适用，不适合低版本浏览器
+			后兄弟节点
+			previousSibling：高版本的浏览器会获取到文本节点（只适合IE6-8）
+			previousElementSibling: 高版本的浏览器适用，不适合低版本浏览器
+	父节点：
+		parentNode：查找父节点
+		offsetParent：获取元素相对定位的父节点
+	DOM方式操作元素属性：
+		获取：getAttribute(属性名称)
+		设置：setAttribute(属性名称,值)
+		删除：removeAttribute(属性名称)
+	用ClassName获取元素
+		getElementsByClassName
+
+第十二课时
+	创建DOM元素：
+		document.createElement(标签名) ==> 创建一个节点
+		父节点.appendChild(节点)  ==> 追加一个节点
+	插入元素：
+		父节点.insertBefore(节点, 原节点) ==> 在已有元素前插入节点
+	删除DOM元素：
+		父节点.removeChild(节点) ==> 删除一个节点
+		
+	文档碎片
+		document.createDocumentFragment()
+		在高级浏览器上基本不提高性能，只有在低版本浏览器上使用
+		
+第十三课时：DOM的高级应用
+	表格的便捷操作：
+		oTab.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[1].getElementsByTagName('td')[1].innerHTML
+		oTab.tBodies[0].rows[1].cells[1].innerHTML
+		获取tbody oTab.getElementsByTagName('tbody')简写oTab.tBodies==>得到的是数组
+		获取tbody oTab.getElementsByTagName('thead')简写oTab.tHead==>得到的是单个元素
+		获取tbody oTab.getElementsByTagName('tfoot')简写oTab.tFoot==>得到的是单个元素
+		获取行getElementsByTagName('tr')简写rows==>得到的是数组
+		获取单元格getElementsByTagName('td')简写cells==>得到的是数组
+	***stringObject.search(regexp)
+	
+	appendChild：先把元素从原有的父元素中删掉，在插入到新的父元素中
+	
+	
+	表单：
+	
+第十五课时：运动基础
+    offsetWidth:
+		
+	
+
+	

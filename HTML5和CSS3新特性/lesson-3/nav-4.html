@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面布局：div</title>
+    <style>
+        /*页面初始化, *号代表所有标签*/
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            color: #FFFFFF;
+            font: 28px 微软雅黑, 黑体, Arial, "Times New Roman", sans-serif;
+        }
+
+        header, nav, main, aside, footer{
+            padding: 10px;
+            margin: 10px;
+        }
+
+        header{
+            height: 100px;
+            background-color: #90C840;
+        }
+
+        header div{
+            float: left;
+        }
+
+        header nav{
+            height: 40px;
+            width: 700px;
+            background-color: #EC1F85;
+            float: left;
+            margin-left: 200px;
+            margin-top: 40px;
+        }
+
+        aside{
+            float: left;
+            width: 280px;
+            height: 480px;
+            background-color: #90C840;
+            margin-top: 0;
+        }
+
+        aside nav{
+            height: 300px;
+            background-color: #EC1F85;
+        }
+
+        main{
+            margin-left: 320px;
+            height: 480px;
+            background-color: #90C840;
+        }
+
+        footer{
+            height: 40px;
+            background-color: #90C840;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>页面标题</div>
+        <nav>网站主导航</nav>
+    </header>
+    <aside>
+        侧边栏
+        <nav>页面主导航</nav>
+    </aside>
+    <main>主内容区</main>
+    <footer>页脚</footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	#div1{
+		width: 200px;height: 200px;background: red;
+	}	
+</style>
+<script>
+	function getStyle(obj, name){
+		if(obj.currentStyle) {
+			//IE、Opera
+			//alert("我支持currentStyle");
+			alert(obj.currentStyle[name]);
+		} else {
+				//FF、chrome、safari
+				//alert("我不支持currentStyle");
+				alert(getComputedStyle(obj,false)[name]);
+		}
+	}
+window.onload = function() {
+	var oDiv = document.getElementById("div1");
+	//alert(oDiv.currentStyle.width)
+	getStyle(oDiv, 'width')
+}	
+</script>
+</head>
+
+<body>
+<div id="div1">
+	
+</div>
+</body>
+</html>
